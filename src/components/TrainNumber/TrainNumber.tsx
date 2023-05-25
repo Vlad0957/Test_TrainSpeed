@@ -1,7 +1,15 @@
 import { useState, useEffect } from "react";
 import "./TrainNumber.css";
 
-function TrainNumber(prop) {
+interface TrainNumber {
+setTrain?: any,
+name: string,
+train:string,
+setSubmited: any,
+submited: string
+}
+
+function TrainNumber(prop: TrainNumber) {
   const [color, setColor] = useState("silver");
 
   useEffect(() => {

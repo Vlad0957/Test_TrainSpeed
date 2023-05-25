@@ -1,5 +1,4 @@
 import "./App.css";
-import SpeeedLimit from './components/SpeedLimit/SpeedLimit'
 import TrainTable from "./components/TrainTable/TrainTable";
 
 function App() {

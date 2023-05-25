@@ -2,7 +2,7 @@ import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import { changeSpeed } from "../../features/train/train-slice";
 import "./Button.css";
 
-function ButtonSave(prop) {
+function ButtonSave(prop:any) {
   const dispatch = useAppDispatch();
   const data = useAppSelector((state) => state.train);
 
@@ -10,7 +10,7 @@ function ButtonSave(prop) {
     if (prop.data.speedLimits.speedLimit <= 0) {
       console.log("speed must be more then zero");
     } else {
-      const arrayOfSpeed = [];
+      const arrayOfSpeed:number[] = [];
       const changeTrain = data.find((el) => el.name == prop.data.prop.train);
 
       changeTrain.speedLimits.forEach((el) => {

@@ -1,4 +1,4 @@
-import { useAppDispatch, useAppSelector } from "../../app/hooks";
+import { useAppSelector } from "../../app/hooks";
 import { useState, useEffect } from "react";
 import SpeedLimit from "../SpeedLimit/SpeedLimit";
 import TrainNumber from "../TrainNumber/TrainNumber";

@@ -4,7 +4,11 @@ import ButtonChange from "../Button/ButtonChange";
 import ButtonSave from "../Button/ButtonSave";
 import "./SpeedLimit.css";
 
-function SpeeedLimit(prop) {
+interface DataFromTrainTable {
+  name: string,
+  train: string,
+}
+function SpeeedLimit(prop: DataFromTrainTable) {
   const data = useAppSelector((state) => state.train);
   let speedLimit;
   data.forEach((el) => {
@@ -17,7 +21,7 @@ function SpeeedLimit(prop) {
     }
   });
 
-  const [limit, setLimit] = useState(speedLimit);
+  const [limit, setLimit] = useState<string>(speedLimit);
   const [view, setView] = useState(false);
 
   return (
