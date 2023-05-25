@@ -2,15 +2,15 @@ import { useState, useEffect } from "react";
 import "./TrainNumber.css";
 
 interface TrainNumber {
-setTrain?: any,
-name: string,
-train:string,
-setSubmited: any,
-submited: string
+  setTrain: () => string;
+  name: string;
+  train: string;
+  setSubmited: () => string;
+  submited: string;
 }
 
 function TrainNumber(prop: TrainNumber) {
-  const [color, setColor] = useState("silver");
+  const [color, setColor] = useState<string>("silver");
 
   useEffect(() => {
     if (prop.submited == prop.name) {
@@ -25,8 +25,7 @@ function TrainNumber(prop: TrainNumber) {
     <button
       type="button"
       className="btn btn-secondary"
-      onClick={(e) => {
-        e.preventDefault();
+      onClick={() => {
         prop.setTrain(prop.name);
         setColor("gray");
         prop.setSubmited(prop.name);
