@@ -18,7 +18,6 @@ function TrainTable() {
     });
   }, [train]);
 
-  console.log(submited, "submited");
   return (
     <div className="MainContainer">
       <div className="TableContainer">
