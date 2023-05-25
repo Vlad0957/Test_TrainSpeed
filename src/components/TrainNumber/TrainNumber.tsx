@@ -2,10 +2,10 @@ import { useState, useEffect } from "react";
 import "./TrainNumber.css";
 
 interface TrainNumber {
-  setTrain: () => string;
+  setTrain: any;
   name: string;
   train: string;
-  setSubmited: () => string;
+  setSubmited: any;
   submited: string;
 }
 
