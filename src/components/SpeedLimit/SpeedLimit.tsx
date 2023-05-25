@@ -10,7 +10,7 @@ interface DataFromTrainTable {
 }
 function SpeeedLimit(prop: DataFromTrainTable) {
   const data = useAppSelector((state) => state.train);
-  let speedLimit;
+  let speedLimit
   data.forEach((el) => {
     if (el.name == prop.train) {
       el.speedLimits.forEach((el) => {
