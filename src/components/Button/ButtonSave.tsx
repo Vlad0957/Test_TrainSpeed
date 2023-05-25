@@ -11,9 +11,9 @@ function ButtonSave(prop:any) {
       console.log("speed must be more then zero");
     } else {
       const arrayOfSpeed:number[] = [];
-      const changeTrain = data.find((el) => el.name == prop.data.prop.train);
+      const changeTrain: any = data.find((el) => el.name == prop.data.prop.train);
 
-      changeTrain.speedLimits.forEach((el) => {
+      changeTrain.speedLimits.forEach((el:any) => {
         if (el.name !== prop.data.speedLimits.name) {
           arrayOfSpeed.push(el.speedLimit);
         }

@@ -9,8 +9,8 @@ interface DataFromTrainTable {
   train: string,
 }
 function SpeeedLimit(prop: DataFromTrainTable) {
+  let speedLimit: number = 0
   const data = useAppSelector((state) => state.train);
-  let speedLimit
   data.forEach((el) => {
     if (el.name == prop.train) {
       el.speedLimits.forEach((el) => {
@@ -21,7 +21,7 @@ function SpeeedLimit(prop: DataFromTrainTable) {
     }
   });
 
-  const [limit, setLimit] = useState<string>(speedLimit);
+  const [limit, setLimit] = useState<number>(speedLimit);
   const [view, setView] = useState(false);
 
   return (
@@ -38,11 +38,11 @@ function SpeeedLimit(prop: DataFromTrainTable) {
           <input
             type="number"
             className="Input"
-            placeholder={speedLimit}
+            placeholder={String(speedLimit)}
             aria-label="Username"
             aria-describedby="basic-addon1"
             name="input"
-            onChange={(event) => setLimit(event.target.value)}
+            onChange={(event) => setLimit(+event.target.value)}
           ></input>
           <ButtonSave
             setView={setView}
