@@ -2,7 +2,30 @@ import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import { changeSpeed } from "../../features/train/train-slice";
 import "./Button.css";
 
-function ButtonSave(prop:any) {
+interface Property {
+  setView: any;
+  data: {
+    prop: {
+      name: string;
+      train: string;
+    };
+    speedLimits: {
+      name: string;
+      speedLimit: number;
+    };
+  };
+}
+
+interface Train {
+  name: string;
+  description: string;
+  speedLimits: {
+    name: string;
+    speedLimit: number;
+  }[];
+}
+
+function ButtonSave(prop: Property) {
   const dispatch = useAppDispatch();
   const data = useAppSelector((state) => state.train);
 
@@ -10,14 +33,18 @@ function ButtonSave(prop:any) {
     if (prop.data.speedLimits.speedLimit <= 0) {
       console.log("speed must be more then zero");
     } else {
-      const arrayOfSpeed:number[] = [];
-      const changeTrain: any = data.find((el) => el.name == prop.data.prop.train);
+      const arrayOfSpeed: number[] = [];
+      const changeTrain: any = data.find(
+        (el: Train) => el.name == prop.data.prop.train
+      );
 
-      changeTrain.speedLimits.forEach((el:any) => {
-        if (el.name !== prop.data.speedLimits.name) {
-          arrayOfSpeed.push(el.speedLimit);
+      changeTrain.speedLimits.forEach(
+        (el: { name: string; speedLimit: number }) => {
+          if (el.name !== prop.data.speedLimits.name) {
+            arrayOfSpeed.push(el.speedLimit);
+          }
         }
-      });
+      );
       arrayOfSpeed.push(+prop.data.speedLimits.speedLimit);
       arrayOfSpeed.sort((a, b) => a - b);
 
@@ -42,8 +69,8 @@ function ButtonSave(prop:any) {
       onClick={handleClick}
       style={{
         width: "65px",
-        backgroundColor: 'Aquamarine',
-        color: 'black'
+        backgroundColor: "Aquamarine",
+        color: "black",
       }}
     >
       Save

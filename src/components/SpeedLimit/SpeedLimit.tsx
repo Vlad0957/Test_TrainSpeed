@@ -5,13 +5,23 @@ import ButtonSave from "../Button/ButtonSave";
 import "./SpeedLimit.css";
 
 interface DataFromTrainTable {
-  name: string,
-  train: string,
+  name: string;
+  train: string;
 }
+
+interface Train {
+  name: string;
+  description: string;
+  speedLimits: {
+    name: string;
+    speedLimit: number;
+  }[];
+}
+
 function SpeeedLimit(prop: DataFromTrainTable) {
-  let speedLimit: number = 0
+  let speedLimit: number = 0;
   const data = useAppSelector((state) => state.train);
-  data.forEach((el) => {
+  data.forEach((el: Train) => {
     if (el.name == prop.train) {
       el.speedLimits.forEach((el) => {
         if (el.name == prop.name) {
@@ -22,7 +32,7 @@ function SpeeedLimit(prop: DataFromTrainTable) {
   });
 
   const [limit, setLimit] = useState<number>(speedLimit);
-  const [view, setView] = useState(false);
+  const [view, setView] = useState<boolean>(false);
 
   return (
     <div className="Container03">
@@ -42,7 +52,7 @@ function SpeeedLimit(prop: DataFromTrainTable) {
             aria-label="Username"
             aria-describedby="basic-addon1"
             name="input"
-            onChange={(event) => setLimit(+event.target.value)}
+            onChange={(event:React.ChangeEvent<HTMLInputElement>) => setLimit(+event.target.value)}
           ></input>
           <ButtonSave
             setView={setView}

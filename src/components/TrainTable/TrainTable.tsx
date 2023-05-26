@@ -4,14 +4,23 @@ import SpeedLimit from "../SpeedLimit/SpeedLimit";
 import TrainNumber from "../TrainNumber/TrainNumber";
 import "./TrainTable.css";
 
+interface Train {
+  name: string;
+  description: string;
+  speedLimits: {
+    name: string;
+    speedLimit: number;
+  }[];
+}
+
 function TrainTable() {
   const data = useAppSelector((state) => state.train);
-  const [train, setTrain] = useState(data[0].name);
-  const [elem, setElem] = useState(data[0]);
-  const [submited, setSubmited] = useState(data[0].name);
+  const [train, setTrain] = useState<string>(data[0].name);
+  const [elem, setElem] = useState<Train>(data[0]);
+  const [submited, setSubmited] = useState<string>(data[0].name);
 
   useEffect(() => {
-    data.forEach((el) => {
+    data.forEach((el: Train) => {
       if (el.name == train) {
         setElem(el);
       }
@@ -34,7 +43,7 @@ function TrainTable() {
         })}
       </div>
       <div>
-        {elem.speedLimits.map((el: any) => (
+        {elem.speedLimits.map((el: { name: string; speedLimit: number }) => (
           <SpeedLimit name={el.name} train={train} />
         ))}
       </div>

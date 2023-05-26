@@ -1,8 +1,7 @@
 import "./Button.css";
 
 function ButtonChange(prop:any) {
-  function handleClick(e:any) {
-    e.preventDefault();
+  function handleClick() {
     prop.setView(true);
   }
   return (
