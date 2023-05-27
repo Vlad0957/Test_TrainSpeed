@@ -14,6 +14,8 @@ interface Property {
       speedLimit: number;
     };
   };
+  prevSpeedLimit: number;
+  nextSpeedLimit: number;
 }
 
 interface Train {
@@ -32,6 +34,10 @@ function ButtonSave(prop: Property) {
   function handleClick() {
     if (prop.data.speedLimits.speedLimit <= 0) {
       console.log("speed must be more then zero");
+    } else if (prop.data.speedLimits.speedLimit <= prop.prevSpeedLimit) {
+      console.log("speed must be more then previous speed");
+    } else if (prop.data.speedLimits.speedLimit >= prop.nextSpeedLimit) {
+      console.log("speed must be less then next speed");
     } else {
       const arrayOfSpeed: number[] = [];
       const changeTrain: any = data.find(
