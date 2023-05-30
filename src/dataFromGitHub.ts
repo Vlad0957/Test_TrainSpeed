@@ -1,7 +1,7 @@
 export const data: any = [
   {
     name: "Поезд №0",
-    description: "",
+    description: "12345",
     speedLimits: [
       {
         name: "Скорость №0",

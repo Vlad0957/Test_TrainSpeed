@@ -10,8 +10,9 @@ interface TrainInfo {
   }[];
 }
 interface ChangeData {
-  arrayOfSpeed: number[];
+  arrayOfSpeed?: number[];
   nameOfTrain: string;
+  description?: string;
 }
 
 const initialState: TrainInfo[] = data;
@@ -21,6 +22,7 @@ const trainSlice = createSlice({
   initialState,
   reducers: {
     changeSpeed(state, action: PayloadAction<ChangeData>) {
+      console.log(action.payload)
       state.forEach((el) => {
         if (el.name == action.payload.nameOfTrain) {
           el.speedLimits.forEach((el, i) => {
@@ -29,8 +31,18 @@ const trainSlice = createSlice({
         }
       });
     },
-  },
+    changeDescription(state, action: PayloadAction<ChangeData>){
+      // console.log(action.payload, 'action.payload!!!')
+        state.forEach((el) => {
+          if (el.name == action.payload.nameOfTrain) {
+            el.description = action.payload.description
+          
+        };
+      })
+    
+  }
+}
 });
 
-export const { changeSpeed } = trainSlice.actions;
+export const { changeSpeed, changeDescription } = trainSlice.actions;
 export default trainSlice.reducer;

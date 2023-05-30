@@ -1,5 +1,5 @@
 import { useAppSelector } from "../../app/hooks";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import ButtonChange from "../Button/ButtonChange";
 import ButtonSave from "../Button/ButtonSave";
 import "./SpeedLimit.css";
@@ -20,35 +20,42 @@ interface Train {
 
 function SpeeedLimit(prop: DataFromTrainTable) {
   let speedLimit: number = 0;
+  let decscriptionTrain: string = "";
   let prevSpeedLimit: number = 0;
   let nextSpeedLimit: number = 0;
+
   const data = useAppSelector((state) => state.train);
+
   data.forEach((el: Train) => {
     if (el.name == prop.train) {
+      decscriptionTrain = el.description;
       el.speedLimits.forEach((el, i, array) => {
         if (el.name == prop.name) {
           speedLimit = el.speedLimit;
-          console.log(array[i - 1], "el[e-1]");
-          if (i !== 0) {
+          if (i == 0) {
+            prevSpeedLimit = 0;
+            if (array.length > 1) {
+              nextSpeedLimit = array[i + 1].speedLimit;
+            } else {
+              nextSpeedLimit = 400;
+            }
+          } else if (i !== 0) {
             prevSpeedLimit = array[i - 1].speedLimit;
             if (i !== array.length - 1) {
               nextSpeedLimit = array[i + 1].speedLimit;
             } else {
               nextSpeedLimit = 400;
             }
-          } else {
-            // nextSpeedLimit = array[i+1].speedLimit
-            // array[i+1].speedLimit
-            // console.log(array[i+1].speedLimit, 'element')
           }
         }
       });
     }
   });
 
-  const [limit, setLimit] = useState<number>(speedLimit);
+  const [limit, setLimit] = useState<number>();
   const [view, setView] = useState<boolean>(false);
-  console.log(prevSpeedLimit, nextSpeedLimit);
+
+  // console.log(prevSpeedLimit, nextSpeedLimit);
   return (
     <div className="Container03">
       <span className="SpeedName">{prop.name}</span>
@@ -63,7 +70,7 @@ function SpeeedLimit(prop: DataFromTrainTable) {
           <input
             type="number"
             className="Input"
-            placeholder={String(speedLimit)}
+            // placeholder={String(speedLimit)}
             aria-label="Username"
             aria-describedby="basic-addon1"
             name="input"
@@ -72,6 +79,7 @@ function SpeeedLimit(prop: DataFromTrainTable) {
               setLimit(+event.target.value)
             }
           ></input>
+
           <ButtonSave
             setView={setView}
             data={{
@@ -89,7 +97,11 @@ function SpeeedLimit(prop: DataFromTrainTable) {
       {!view && (
         <div className="Container05">
           <span className="Speed">{speedLimit}</span>
-          <ButtonChange setView={setView} />
+          <ButtonChange
+            setView={setView}
+            setLimit={setLimit}
+            speedLimit={speedLimit}
+          />
         </div>
       )}
     </div>

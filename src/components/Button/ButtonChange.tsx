@@ -1,8 +1,14 @@
 import "./Button.css";
 
-function ButtonChange(prop:any) {
+interface PropertiesToButtonChange {
+  setView: any;
+  setLimit: any;
+  speedLimit: number;
+}
+function ButtonChange(prop: PropertiesToButtonChange) {
   function handleClick() {
     prop.setView(true);
+    prop.setLimit(prop.speedLimit);
   }
   return (
     <button

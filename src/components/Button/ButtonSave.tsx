@@ -4,6 +4,7 @@ import "./Button.css";
 
 interface Property {
   setView: any;
+
   data: {
     prop: {
       name: string;

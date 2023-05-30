@@ -2,6 +2,7 @@ import { useAppSelector } from "../../app/hooks";
 import { useState, useEffect } from "react";
 import SpeedLimit from "../SpeedLimit/SpeedLimit";
 import TrainNumber from "../TrainNumber/TrainNumber";
+import Discription from "../discriptionComp/Discription";
 import "./TrainTable.css";
 
 interface Train {
@@ -18,11 +19,14 @@ function TrainTable() {
   const [train, setTrain] = useState<string>(data[0].name);
   const [elem, setElem] = useState<Train>(data[0]);
   const [submited, setSubmited] = useState<string>(data[0].name);
+  const [description, setDescription] = useState<string>("??");
 
   useEffect(() => {
     data.forEach((el: Train) => {
       if (el.name == train) {
         setElem(el);
+        console.log(el.description);
+        setDescription(el.description);
       }
     });
   }, [train]);
@@ -44,8 +48,19 @@ function TrainTable() {
       </div>
       <div>
         {elem.speedLimits.map((el: { name: string; speedLimit: number }) => (
-          <SpeedLimit name={el.name} train={train} />
+          <SpeedLimit
+            name={el.name}
+            train={train}
+            speedLimit={el.speedLimit}
+          />
         ))}
+
+        <Discription
+          setDescription={setDescription}
+          description={description}
+          name={train}
+          descrData={elem.description}
+        />
       </div>
     </div>
   );
